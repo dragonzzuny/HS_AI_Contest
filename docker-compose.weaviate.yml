@@ -1,0 +1,22 @@
+# 화성ON 벡터 DB — Weaviate 자체호스팅
+# 실행: docker compose -f docker-compose.weaviate.yml up -d
+# 접속: http://localhost:8080  (gRPC 50051)
+# 벡터는 BYO(BGE-M3로 직접 생성해 적재) → vectorizer 모듈 불필요.
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.2
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"   # 로컬 개발용. 배포 시 API 키 인증으로 변경
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      DEFAULT_VECTORIZER_MODULE: "none"                  # BYO 벡터(BGE-M3)
+      ENABLE_MODULES: "reranker-transformers"            # 선택: 리랭커 모듈(미사용 시 제거 가능)
+      CLUSTER_HOSTNAME: "node1"
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+volumes:
+  weaviate_data:

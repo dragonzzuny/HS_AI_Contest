@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>화성ON · 외국인 생활민원 AI 안내사</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">화성<b>ON</b></span>
+      <span class="tagline">외국인 생활민원 AI 안내사 · 6개 언어</span>
+    </div>
+    <div class="langs" id="langs"></div>
+    <div class="mode" id="mode">·</div>
+  </header>
+
+  <main class="layout">
+    <section class="chat">
+      <div class="messages" id="messages">
+        <div class="msg bot">
+          <div class="bubble" id="welcome">안녕하세요. 화성시 생활민원을 도와드립니다. 무엇이든 물어보세요.</div>
+        </div>
+      </div>
+      <div class="examples" id="examples"></div>
+      <form class="composer" id="composer">
+        <input id="input" autocomplete="off" placeholder="예) 쓰레기는 어떻게 버려요?" />
+        <button type="submit" id="send">전송</button>
+      </form>
+    </section>
+
+    <aside class="sources">
+      <div class="panel-head" id="h-sources">📎 근거 출처 <span class="hint">(답변의 [번호] 클릭)</span></div>
+      <div id="citations" class="citations-empty">질문하면 답변의 근거가 여기에 표시됩니다.</div>
+      <div class="panel-head" id="h-helper">⚡ 처리 도우미</div>
+      <div id="actions" class="actions-empty">필요서류·신청 링크·서류초안이 여기에 표시됩니다.</div>
+      <div class="disclaimer">⚠️ 안내는 참고용입니다. 최종 확인은 담당기관에 문의하세요.</div>
+    </aside>
+  </main>
+
+  <!-- 서류초안 모달 -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div><div id="modal-title">서류 초안</div><div id="modal-desc" class="modal-desc"></div></div>
+        <button class="x" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-foot">
+        <button id="modal-make" class="primary">초안 생성</button>
+        <button id="modal-copy" class="ghost" style="display:none">복사</button>
+      </div>
+      <textarea id="modal-result" readonly style="display:none"></textarea>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

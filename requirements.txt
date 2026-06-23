@@ -1,0 +1,8 @@
+# 화성ON 데이터/적재 파이프라인 (Python)
+requests>=2.31
+# 임베딩: BGE-M3 (다국어, 무료)
+sentence-transformers>=3.0
+# 벡터 DB: Weaviate v4 클라이언트
+weaviate-client>=4.9
+# 리랭커는 ingest 시 불필요(질의시 사용). FlagEmbedding 사용 시 별도 설치:
+# FlagEmbedding>=1.2   # BAAI BGE-reranker-v2-m3

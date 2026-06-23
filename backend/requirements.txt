@@ -1,0 +1,8 @@
+# 화성ON 백엔드 (FastAPI)
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27
+pydantic>=2.0
+# 실동작(선택, Ollama PC에서):
+#   - Ollama 자체가 임베딩(bge-m3)+생성 담당 → 추가 파이썬 의존성 불필요
+#   - Weaviate 검색 사용 시: weaviate-client>=4.9 (프로젝트 루트 requirements.txt 참고)
