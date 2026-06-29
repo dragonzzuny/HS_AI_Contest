@@ -1,14 +1,9 @@
-# 생성 데이터 / 산출물 (스크립트로 재생성)
-data/
-kb/build/
-
 # Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
 venv/
-.env
 
 # Node
 node_modules/
@@ -17,10 +12,3 @@ node_modules/
 .omc/
 .vscode/
 .idea/
-
-# 참고 원문(공고문)·스크린샷 등 바이너리
-*.pdf
-*.hwpx
-*.hwp
-*.png
-*.jpg
