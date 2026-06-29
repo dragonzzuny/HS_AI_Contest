@@ -1,0 +1,116 @@
+{
+  "version": "1.1",
+  "note": "화성ON 도메인 온톨로지(원본). 도메인↔자격↔법적근거(화성시 자치법규 실효조문)↔선행절차↔지원정책을 연결한다. build_ontology.py가 legal_basis_laws+article_keywords로 '목적/정의' 보일러플레이트가 아닌 실효 조문을 골라 ID로 해석한다. 국가법 영역(근로기준법·출입국관리법 등)은 L2에 없으므로 링크하지 않고 national_law 텍스트로만 표기(헛링크 방지). 수집 실패(오류) 청크는 build·검증 단계에서 제외.",
+  "domains": {
+    "폐기물": {
+      "label": {"ko": "쓰레기·폐기물", "en": "Waste disposal"},
+      "eligibility": {"ko": "화성시 거주자 누구나", "en": "Any Hwaseong resident"},
+      "legal_basis_laws": [
+        "화성시 폐기물 관리에 관한 조례",
+        "화성시 음식물류 폐기물의 발생억제, 수집ㆍ운반 및 재활용에 관한 조례"
+      ],
+      "article_keywords": ["배출방법", "배출", "종량제", "수수료", "대형", "감면", "신고"],
+      "national_law": null,
+      "prerequisites": [],
+      "support_policies": [
+        {"name": "폐가전제품 무상 방문수거", "url": "https://www.15990903.or.kr",
+         "desc": {"ko": "냉장고·세탁기 등 대형 폐가전 무료 방문수거 ☎1599-0903", "en": "Free pickup of large waste appliances ☎1599-0903"}}
+      ]
+    },
+    "보육교육": {
+      "label": {"ko": "보육·교육", "en": "Childcare & school"},
+      "eligibility": {"ko": "화성시 거주 영유아 보호자(외국인 포함)", "en": "Guardians of infants residing in Hwaseong (incl. foreigners)"},
+      "legal_basis_laws": ["화성시 영유아보육 조례"],
+      "article_keywords": ["보육료", "보조", "비용", "입소", "어린이집", "지원", "우선"],
+      "national_law": {"ko": "영유아보육법", "en": "Infant Care Act"},
+      "prerequisites": ["행정"],
+      "support_policies": [
+        {"name": "보육료·유아학비 지원", "url": "https://www.childcare.go.kr",
+         "desc": {"ko": "어린이집·유치원 보육료 국가 지원(자격 충족 시 아이사랑 신청)", "en": "State childcare/preschool fee support"}},
+        {"name": "다문화가족 자녀 교육활동비", "url": "https://www.mogef.go.kr",
+         "desc": {"ko": "초 40·중 50·고 60만원(가족센터 신청)", "en": "Education allowance for multicultural children"}}
+      ]
+    },
+    "지원기관": {
+      "label": {"ko": "외국인 지원기관", "en": "Support centers"},
+      "eligibility": {"ko": "화성시 거주 외국인주민·다문화가족", "en": "Foreign residents & multicultural families in Hwaseong"},
+      "legal_basis_laws": [
+        "화성시 다문화가족 및 외국인주민 지원 조례",
+        "화성시 가족센터의 설치 및 운영에 관한 조례"
+      ],
+      "article_keywords": ["지원", "상담", "통번역", "교육", "사업", "센터"],
+      "national_law": null,
+      "prerequisites": [],
+      "support_policies": [
+        {"name": "다누리콜센터 1577-1366", "url": "https://www.liveinkorea.kr",
+         "desc": {"ko": "13개 언어 24시간 상담·통역(생활정보·위기지원)", "en": "13-language 24h counseling & interpretation"}},
+        {"name": "화성시가족센터", "url": "https://www.liveinkorea.kr",
+         "desc": {"ko": "통번역·한국어교육·자녀 학습 등 외국인주민 지원", "en": "Interpretation, Korean classes, child education support"}}
+      ]
+    },
+    "노무": {
+      "label": {"ko": "임금·노무", "en": "Wages & labor"},
+      "eligibility": {"ko": "화성시 사업장 근로자(체류자격 무관, 미등록 포함 보호)", "en": "Workers at Hwaseong workplaces (regardless of visa status)"},
+      "legal_basis_laws": ["화성시 노동 기본 조례"],
+      "article_keywords": ["권리", "보호", "증진", "상담", "차별", "노동자"],
+      "national_law": {"ko": "근로기준법", "en": "Labor Standards Act"},
+      "prerequisites": [],
+      "support_policies": [
+        {"name": "간이대지급금(체불임금 국가 대지급)", "url": "https://www.comwel.or.kr",
+         "desc": {"ko": "사업주가 못 준 임금을 국가가 일부 먼저 지급(근로복지공단)", "en": "State advance for unpaid wages"}},
+        {"name": "무료 법률구조(대한법률구조공단)", "url": "https://www.klac.or.kr",
+         "desc": {"ko": "임금체불·부당해고 무료 법률상담·소송지원 ☎132", "en": "Free legal aid for labor disputes ☎132"}}
+      ]
+    },
+    "체류": {
+      "label": {"ko": "체류·외국인등록", "en": "Visa & registration"},
+      "eligibility": {"ko": "90일 초과 체류 외국인", "en": "Foreigners staying over 90 days"},
+      "legal_basis_laws": ["화성시 다문화가족 및 외국인주민 지원 조례"],
+      "article_keywords": ["지원", "정착", "생활", "상담", "교육", "외국인주민"],
+      "national_law": {"ko": "출입국관리법", "en": "Immigration Act"},
+      "prerequisites": [],
+      "support_policies": [
+        {"name": "사회통합프로그램(KIIP)", "url": "https://www.socinet.go.kr",
+         "desc": {"ko": "무료 한국어·한국사회 교육, 이수 시 체류·국적 혜택", "en": "Free Korean & society course (visa/naturalization benefits)"}}
+      ]
+    },
+    "건강보험": {
+      "label": {"ko": "건강보험·의료", "en": "Health insurance"},
+      "eligibility": {"ko": "6개월 이상 체류 외국인(직장가입자 외 지역가입 당연적용)", "en": "Foreigners residing 6+ months (mandatory enrollment)"},
+      "legal_basis_laws": [],
+      "article_keywords": [],
+      "national_law": {"ko": "국민건강보험법", "en": "National Health Insurance Act"},
+      "prerequisites": ["체류"],
+      "support_policies": [
+        {"name": "긴급복지 의료지원", "url": "https://www.bokjiro.go.kr",
+         "desc": {"ko": "갑작스러운 위기 상황 의료비 지원(소득기준)", "en": "Emergency medical cost support"}}
+      ]
+    },
+    "운전면허": {
+      "label": {"ko": "운전면허", "en": "Driver's license"},
+      "eligibility": {"ko": "외국인등록(또는 거소신고)된 외국인", "en": "Registered foreign residents"},
+      "legal_basis_laws": [],
+      "article_keywords": [],
+      "national_law": {"ko": "도로교통법", "en": "Road Traffic Act"},
+      "prerequisites": ["체류"],
+      "support_policies": []
+    },
+    "행정": {
+      "label": {"ko": "행정·전입", "en": "Administration"},
+      "eligibility": {"ko": "화성시로 전입한 거주자", "en": "Residents who moved into Hwaseong"},
+      "legal_basis_laws": [],
+      "article_keywords": [],
+      "national_law": {"ko": "주민등록법 / 출입국관리법(외국인 체류지 신고)", "en": "Resident Registration Act"},
+      "prerequisites": [],
+      "support_policies": []
+    }
+  },
+  "relations": [
+    {"from": "체류", "type": "prerequisite_for", "to": "건강보험",
+     "note": {"ko": "외국인등록 후 6개월 이상 체류 시 건강보험 지역가입 의무", "en": "Health insurance enrollment follows foreign registration & 6-month residence"}},
+    {"from": "체류", "type": "prerequisite_for", "to": "운전면허",
+     "note": {"ko": "운전면허 신청·발급에는 외국인등록(거소신고)이 필요", "en": "A driver's license requires foreign registration first"}},
+    {"from": "체류", "type": "prerequisite_for", "to": "보육교육",
+     "note": {"ko": "어린이집 입소 신청 시 외국인등록·전입 정보가 활용됨", "en": "Daycare application uses registration & move-in info"}}
+  ]
+}

@@ -1,0 +1,519 @@
+{
+  "version": "1.1",
+  "domains": {
+    "폐기물": {
+      "label": {
+        "ko": "쓰레기·폐기물",
+        "en": "Waste disposal"
+      },
+      "eligibility": {
+        "ko": "화성시 거주자 누구나",
+        "en": "Any Hwaseong resident"
+      },
+      "national_law": null,
+      "prerequisites": [],
+      "support_policies": [
+        {
+          "name": "폐가전제품 무상 방문수거",
+          "url": "https://www.15990903.or.kr",
+          "desc": {
+            "ko": "냉장고·세탁기 등 대형 폐가전 무료 방문수거 ☎1599-0903",
+            "en": "Free pickup of large waste appliances ☎1599-0903"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-waste-01",
+        "c-waste-02",
+        "c-waste-03",
+        "c-waste-04"
+      ],
+      "required_docs": [
+        "없음",
+        "없음 (온라인 신청 시 결제 정보)",
+        "없음 (음식물용 종량제봉투/용기 구매)",
+        "없음 (지정판매소에서 종량제봉투 구매)"
+      ],
+      "dept": "화성특례시 환경국 자원순환과 / 종량제 물품 공급은 화성시환경재단(지정판매소 일괄 공급, 2025.7.1부터)",
+      "phone": "☎ 031-5189-6801 (자원순환과)",
+      "legal_basis": [
+        {
+          "id": "ord-2063085-33",
+          "law_name": "화성시 폐기물 관리에 관한 조례",
+          "article": "제25조",
+          "content": "제25조(폐기물의 수집ㆍ운반ㆍ처리수수료의 부과ㆍ징수)① 법 제14조제3항에 따른 폐기물의 수집ㆍ운반ㆍ처리에 관한 수수료(이하 “수수료”라 한다)의 부과ㆍ징수는 다음 각 호에 따른다. (개정 2011. 10. 19, 2012. 6. 5, 2016. 5.",
+          "source": "[화성시 폐기물 관리에 관한 조례 제25조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%ED%8F%90%EA%B8%B0%EB%AC%BC%20%EA%B4%80%EB%A6%AC%EC%97%90%20%EA%B4%80%ED%95%9C%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        },
+        {
+          "id": "ord-2063085-43",
+          "law_name": "화성시 폐기물 관리에 관한 조례",
+          "article": "제33조",
+          "content": "제33조(무단투기 신고포상금 지급 등)① 시장은 무단투기 등의 근절을 위하여 무단투기 등의 법규위반 행위를 신고하는 사람에게 과태료의 일정액을 예산의 범위 내에서 포상금으로 지급할 수 있으며, 신고포상금의 지급은 법규위반 행위 적발일부터 10일 이내에",
+          "source": "[화성시 폐기물 관리에 관한 조례 제33조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%ED%8F%90%EA%B8%B0%EB%AC%BC%20%EA%B4%80%EB%A6%AC%EC%97%90%20%EA%B4%80%ED%95%9C%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        },
+        {
+          "id": "ord-2063105-10",
+          "law_name": "화성시 음식물류 폐기물의 발생억제, 수집ㆍ운반 및 재활용에 관한 조례",
+          "article": "제10조",
+          "content": "제10조(배출자의 처리 협조)① 시장은 음식물류 폐기물의 재활용이 가능한 지역을 대상으로 음식물쓰레기 분리배출지역을 정하고, 배출방법과 배출요령은 별표 1과 같다.② 시장은 음식물류 폐기물을 효율적으로 수집ㆍ운반ㆍ재활용하기 위하여 수거일ㆍ배출장소ㆍ배출",
+          "source": "[화성시 음식물류 폐기물의 발생억제, 수집ㆍ운반 및 재활용에 관한 조례 제10조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EC%9D%8C%EC%8B%9D%EB%AC%BC%EB%A5%98%20%ED%8F%90%EA%B8%B0%EB%AC%BC%EC%9D%98%20%EB%B0%9C%EC%83%9D%EC%96%B5%EC%A0%9C%2C%20%EC%88%98%EC%A7%91%E3%86%8D%EC%9A%B4%EB%B0%98%20%EB%B0%8F%20%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%97%90%20%EA%B4%80%ED%95%9C%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260101"
+        },
+        {
+          "id": "ord-2063105-9",
+          "law_name": "화성시 음식물류 폐기물의 발생억제, 수집ㆍ운반 및 재활용에 관한 조례",
+          "article": "제9조",
+          "content": "제9조(수집ㆍ운반ㆍ처리수수료의 부과ㆍ징수)① 법 제14조제5항 및 제6항에 따라 음식물류 폐기물의 수집ㆍ운반ㆍ처리에 관한 수수료(이하 “수수료”라 한다)는 배출량에 따라 차등 징수(이하 “종량제시행”이라 한다)하여야 하며, 배출량구간에 따라 수수료 부",
+          "source": "[화성시 음식물류 폐기물의 발생억제, 수집ㆍ운반 및 재활용에 관한 조례 제9조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EC%9D%8C%EC%8B%9D%EB%AC%BC%EB%A5%98%20%ED%8F%90%EA%B8%B0%EB%AC%BC%EC%9D%98%20%EB%B0%9C%EC%83%9D%EC%96%B5%EC%A0%9C%2C%20%EC%88%98%EC%A7%91%E3%86%8D%EC%9A%B4%EB%B0%98%20%EB%B0%8F%20%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%97%90%20%EA%B4%80%ED%95%9C%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260101"
+        }
+      ]
+    },
+    "보육교육": {
+      "label": {
+        "ko": "보육·교육",
+        "en": "Childcare & school"
+      },
+      "eligibility": {
+        "ko": "화성시 거주 영유아 보호자(외국인 포함)",
+        "en": "Guardians of infants residing in Hwaseong (incl. foreigners)"
+      },
+      "national_law": {
+        "ko": "영유아보육법",
+        "en": "Infant Care Act"
+      },
+      "prerequisites": [
+        "행정"
+      ],
+      "support_policies": [
+        {
+          "name": "보육료·유아학비 지원",
+          "url": "https://www.childcare.go.kr",
+          "desc": {
+            "ko": "어린이집·유치원 보육료 국가 지원(자격 충족 시 아이사랑 신청)",
+            "en": "State childcare/preschool fee support"
+          }
+        },
+        {
+          "name": "다문화가족 자녀 교육활동비",
+          "url": "https://www.mogef.go.kr",
+          "desc": {
+            "ko": "초 40·중 50·고 60만원(가족센터 신청)",
+            "en": "Education allowance for multicultural children"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-edu-01",
+        "c-edu-02",
+        "c-edu-03",
+        "c-edu-04"
+      ],
+      "required_docs": [
+        "거주사실 확인서류(주택임대차계약서 등)",
+        "귀화자 기재) 또는 가족관계증명서",
+        "다문화가족 입증서류",
+        "보호자",
+        "소득 증빙(신청기관 안내에 따름)",
+        "신청서",
+        "외국어는 공증 번역본)",
+        "외국인 아동 보육료 지원 신청서",
+        "외국인등록 사실증명서",
+        "외국인등록증 사본(없으면 외국인등록사실증명서)",
+        "자녀 외국인등록증 사본(앞뒤)",
+        "자녀 재학",
+        "주민등록등본(결혼이민자",
+        "출생연월일 확인 공문서(여권 사본 등)",
+        "학력 증빙서류(있을 경우"
+      ],
+      "dept": "화성시 영유아보육과 / 각 구 돌봄·가정보육과",
+      "phone": "☎ 영유아보육과 031-5189-6084",
+      "legal_basis": [
+        {
+          "id": "ord-2087613-20",
+          "law_name": "화성시 영유아보육 조례",
+          "article": "제16조",
+          "content": "제16조(비용의 보조) 시장은 다음 각 호에 정한 비용의 일부 또는 전부를 예산의 범위에서 보조할 수 있다. (개정 2020. 4. 6, 2021. 11. 22, 2025. 11. 12)1.「영유아보육법」등 관계법령과 보육소관 장관 또는 도지사가 정한",
+          "source": "[화성시 영유아보육 조례 제16조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EC%98%81%EC%9C%A0%EC%95%84%EB%B3%B4%EC%9C%A1%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20251112"
+        },
+        {
+          "id": "ord-2087613-16",
+          "law_name": "화성시 영유아보육 조례",
+          "article": "제13조",
+          "content": "제13조(위탁운영)① 시장은 시립어린이집을 「사회복지사업법」에 따른 사회복지법인이나 비영리법인ㆍ단체 또는 개인에게 위탁하여 운영할 수 있다. 다만, 개인에게 위탁 운영하는 경우에는 위탁운영자가 직접 시립어린이집을 운영하여야 한다.② 제1항에 따라 시립",
+          "source": "[화성시 영유아보육 조례 제13조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EC%98%81%EC%9C%A0%EC%95%84%EB%B3%B4%EC%9C%A1%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20251112"
+        }
+      ]
+    },
+    "지원기관": {
+      "label": {
+        "ko": "외국인 지원기관",
+        "en": "Support centers"
+      },
+      "eligibility": {
+        "ko": "화성시 거주 외국인주민·다문화가족",
+        "en": "Foreign residents & multicultural families in Hwaseong"
+      },
+      "national_law": null,
+      "prerequisites": [],
+      "support_policies": [
+        {
+          "name": "다누리콜센터 1577-1366",
+          "url": "https://www.liveinkorea.kr",
+          "desc": {
+            "ko": "13개 언어 24시간 상담·통역(생활정보·위기지원)",
+            "en": "13-language 24h counseling & interpretation"
+          }
+        },
+        {
+          "name": "화성시가족센터",
+          "url": "https://www.liveinkorea.kr",
+          "desc": {
+            "ko": "통번역·한국어교육·자녀 학습 등 외국인주민 지원",
+            "en": "Interpretation, Korean classes, child education support"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-support-01",
+        "c-support-02",
+        "c-support-03",
+        "c-support-04",
+        "c-support-05"
+      ],
+      "required_docs": [
+        "기관",
+        "외국인등록증 등)",
+        "프로그램별 상이",
+        "프로그램별 상이 (신분증",
+        "프로그램별 상이 (외국인등록증 등)"
+      ],
+      "dept": "화성시 가족센터 (화성시 위탁 운영)",
+      "phone": "☎ 대표 031-352-1214 / 상담 031-352-0304 / 팩스 031-352-1217 / hscmfc@daum.net",
+      "legal_basis": [
+        {
+          "id": "ord-1987023-7",
+          "law_name": "화성시 다문화가족 및 외국인주민 지원 조례",
+          "article": "제7조",
+          "content": "제7조(지원사업)① 시장은 다문화가족에 대해 다음 각 호의 사업을 지원할 수 있다.1. 다문화가족 이해증진을 위한 교육 및 홍보2. 결혼이민자등의 사회적응에 필요한 기본적 정보 제공 및 사회적응교육과 직업교육, 한국어교육 지원3. 다문화가족의 가족생활",
+          "source": "[화성시 다문화가족 및 외국인주민 지원 조례 제7조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%8B%A4%EB%AC%B8%ED%99%94%EA%B0%80%EC%A1%B1%20%EB%B0%8F%20%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%A3%BC%EB%AF%BC%20%EC%A7%80%EC%9B%90%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        },
+        {
+          "id": "ord-1987023-6",
+          "law_name": "화성시 다문화가족 및 외국인주민 지원 조례",
+          "article": "제6조",
+          "content": "제6조(지원계획)① 다문화가족 및 외국인주민 지원계획(이하 “지원계획”이라 한다) 에는 다음 각 호의 사항이 포함되어야 한다.1. 다문화가족 및 외국인주민 지원의 목표와 비전에 관한 사항2. 다문화가족 및 외국인주민 지원 시책에 관한 다음 각 목의 사",
+          "source": "[화성시 다문화가족 및 외국인주민 지원 조례 제6조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%8B%A4%EB%AC%B8%ED%99%94%EA%B0%80%EC%A1%B1%20%EB%B0%8F%20%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%A3%BC%EB%AF%BC%20%EC%A7%80%EC%9B%90%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        }
+      ]
+    },
+    "노무": {
+      "label": {
+        "ko": "임금·노무",
+        "en": "Wages & labor"
+      },
+      "eligibility": {
+        "ko": "화성시 사업장 근로자(체류자격 무관, 미등록 포함 보호)",
+        "en": "Workers at Hwaseong workplaces (regardless of visa status)"
+      },
+      "national_law": {
+        "ko": "근로기준법",
+        "en": "Labor Standards Act"
+      },
+      "prerequisites": [],
+      "support_policies": [
+        {
+          "name": "간이대지급금(체불임금 국가 대지급)",
+          "url": "https://www.comwel.or.kr",
+          "desc": {
+            "ko": "사업주가 못 준 임금을 국가가 일부 먼저 지급(근로복지공단)",
+            "en": "State advance for unpaid wages"
+          }
+        },
+        {
+          "name": "무료 법률구조(대한법률구조공단)",
+          "url": "https://www.klac.or.kr",
+          "desc": {
+            "ko": "임금체불·부당해고 무료 법률상담·소송지원 ☎132",
+            "en": "Free legal aid for labor disputes ☎132"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-labor-01",
+        "c-labor-02",
+        "c-labor-03",
+        "c-labor-04",
+        "c-labor-05",
+        "c-labor-06",
+        "c-labor-07"
+      ],
+      "required_docs": [
+        "(해당없음 — 계약 시 사업주가 작성",
+        "(해당없음 — 안내)",
+        "(해당없음)",
+        "교부)",
+        "근로계약 종료 입증자료",
+        "근로계약서",
+        "급여명세서",
+        "녹취 등 근로관계",
+        "문자 대화내용",
+        "사업장변경신청서",
+        "신청서 작성 외 근로계약서",
+        "여권",
+        "외국인등록증",
+        "요양급여신청서",
+        "요양급여신청소견서(의료기관 작성)",
+        "재해경위 입증자료",
+        "체불 사실 입증자료",
+        "체불 입증자료 첨부(전자파일)",
+        "출근부",
+        "카카오톡",
+        "통장 입금내역"
+      ],
+      "dept": "중부지방고용노동청 경기지청 (근로개선지도과)",
+      "phone": "☎ 1350 (고용노동부 고객상담센터, 다국어 통역) / 경기지청 대표 031-259-0204",
+      "legal_basis": [
+        {
+          "id": "ord-1632451-6",
+          "law_name": "화성시 노동 기본 조례",
+          "article": "제6조",
+          "content": "제6조(노동자의 권리 보호 및 증진활동 지원)① 시장은 노동자의 기본적인 노동권 보장 확대를 위한 교육프로그램 마련 및 노동자의 권리 침해 발생 시 권리구제 절차에 필요한 지원 등 노동자의 권리보호를 위한 시책개발을 위하여 노력하여야 한다.② 시장은 ",
+          "source": "[화성시 노동 기본 조례 제6조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%85%B8%EB%8F%99%20%EA%B8%B0%EB%B3%B8%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20211005"
+        },
+        {
+          "id": "ord-1632451-8",
+          "law_name": "화성시 노동 기본 조례",
+          "article": "제8조",
+          "content": "제8조(노동자권리보호위원회의 설치 및 기능)① 시장은 노동자의 권리 보호 및 증진에 관한 주요 시책을 심의ㆍ자문하기 위하여 화성시 노동자권리보호위원회(이하 “위원회”라 한다)를 둔다.② 위원회는 다음 각 호의 기능을 수행한다.1. 기본계획 수립에 대한",
+          "source": "[화성시 노동 기본 조례 제8조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%85%B8%EB%8F%99%20%EA%B8%B0%EB%B3%B8%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20211005"
+        }
+      ]
+    },
+    "체류": {
+      "label": {
+        "ko": "체류·외국인등록",
+        "en": "Visa & registration"
+      },
+      "eligibility": {
+        "ko": "90일 초과 체류 외국인",
+        "en": "Foreigners staying over 90 days"
+      },
+      "national_law": {
+        "ko": "출입국관리법",
+        "en": "Immigration Act"
+      },
+      "prerequisites": [],
+      "support_policies": [
+        {
+          "name": "사회통합프로그램(KIIP)",
+          "url": "https://www.socinet.go.kr",
+          "desc": {
+            "ko": "무료 한국어·한국사회 교육, 이수 시 체류·국적 혜택",
+            "en": "Free Korean & society course (visa/naturalization benefits)"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-stay-01",
+        "c-stay-02",
+        "c-stay-03",
+        "c-stay-04",
+        "c-stay-05"
+      ],
+      "required_docs": [
+        "(공통) 통합신청서",
+        "(해당 없음 — 기관 안내)",
+        "비자 면 사본)",
+        "수수료",
+        "숙소제공확인서 등)",
+        "여권",
+        "여권 및 외국인등록증",
+        "여권(인적사항",
+        "외국인등록증",
+        "주택소유증명",
+        "천연색 사진 1매(3.5×4.5cm)",
+        "체류자격별 첨부서류",
+        "체류자격별 첨부서류 / (재입국) 재입국허가 신청 / (자격변경) 변경하려는 자격의 자격요건 입증서류",
+        "체류지 입증서류",
+        "체류지 입증서류(임대차계약서",
+        "체류지변경 신고서",
+        "통합신청서",
+        "통합신청서(별지 제34호)"
+      ],
+      "dept": "수원출입국·외국인청 (법무부 출입국·외국인정책본부)",
+      "phone": "☎ 외국인종합안내센터 1345 (국번없이) / 수원출입국·외국인청 031-695-3817",
+      "legal_basis": [
+        {
+          "id": "ord-1987023-6",
+          "law_name": "화성시 다문화가족 및 외국인주민 지원 조례",
+          "article": "제6조",
+          "content": "제6조(지원계획)① 다문화가족 및 외국인주민 지원계획(이하 “지원계획”이라 한다) 에는 다음 각 호의 사항이 포함되어야 한다.1. 다문화가족 및 외국인주민 지원의 목표와 비전에 관한 사항2. 다문화가족 및 외국인주민 지원 시책에 관한 다음 각 목의 사",
+          "source": "[화성시 다문화가족 및 외국인주민 지원 조례 제6조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%8B%A4%EB%AC%B8%ED%99%94%EA%B0%80%EC%A1%B1%20%EB%B0%8F%20%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%A3%BC%EB%AF%BC%20%EC%A7%80%EC%9B%90%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        },
+        {
+          "id": "ord-1987023-7",
+          "law_name": "화성시 다문화가족 및 외국인주민 지원 조례",
+          "article": "제7조",
+          "content": "제7조(지원사업)① 시장은 다문화가족에 대해 다음 각 호의 사업을 지원할 수 있다.1. 다문화가족 이해증진을 위한 교육 및 홍보2. 결혼이민자등의 사회적응에 필요한 기본적 정보 제공 및 사회적응교육과 직업교육, 한국어교육 지원3. 다문화가족의 가족생활",
+          "source": "[화성시 다문화가족 및 외국인주민 지원 조례 제7조](https://www.law.go.kr/LSW/lsAstSc.do?menuId=1&query=%ED%99%94%EC%84%B1%EC%8B%9C%20%EB%8B%A4%EB%AC%B8%ED%99%94%EA%B0%80%EC%A1%B1%20%EB%B0%8F%20%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%A3%BC%EB%AF%BC%20%EC%A7%80%EC%9B%90%20%EC%A1%B0%EB%A1%80)",
+          "enforce_date": "20260201"
+        }
+      ]
+    },
+    "건강보험": {
+      "label": {
+        "ko": "건강보험·의료",
+        "en": "Health insurance"
+      },
+      "eligibility": {
+        "ko": "6개월 이상 체류 외국인(직장가입자 외 지역가입 당연적용)",
+        "en": "Foreigners residing 6+ months (mandatory enrollment)"
+      },
+      "national_law": {
+        "ko": "국민건강보험법",
+        "en": "National Health Insurance Act"
+      },
+      "prerequisites": [
+        "체류"
+      ],
+      "support_policies": [
+        {
+          "name": "긴급복지 의료지원",
+          "url": "https://www.bokjiro.go.kr",
+          "desc": {
+            "ko": "갑작스러운 위기 상황 의료비 지원(소득기준)",
+            "en": "Emergency medical cost support"
+          }
+        }
+      ],
+      "faq_ids": [
+        "c-health-01",
+        "c-health-02",
+        "c-health-03",
+        "c-health-04",
+        "c-health-05",
+        "c-health-06",
+        "c-health-07"
+      ],
+      "required_docs": [
+        "가능 시 외국인등록증",
+        "건강보험증(또는 모바일 건강보험증)",
+        "여권 (자격 자동 부여이므로 별도 가입신청서는 원칙적으로 불요)",
+        "여권(응급진료는 신분증 없어도 가능)",
+        "외국인등록증",
+        "외국인등록증(또는 국내거소신고증)",
+        "외국인등록증(본인 인증용)",
+        "해당 없음",
+        "해당 없음(공단이 직접 부과)"
+      ],
+      "dept": "국민건강보험공단",
+      "phone": "☎ 1577-1000",
+      "legal_basis": []
+    },
+    "운전면허": {
+      "label": {
+        "ko": "운전면허",
+        "en": "Driver's license"
+      },
+      "eligibility": {
+        "ko": "외국인등록(또는 거소신고)된 외국인",
+        "en": "Registered foreign residents"
+      },
+      "national_law": {
+        "ko": "도로교통법",
+        "en": "Road Traffic Act"
+      },
+      "prerequisites": [
+        "체류"
+      ],
+      "support_policies": [],
+      "faq_ids": [
+        "c-license-01",
+        "c-license-02",
+        "c-license-03"
+      ],
+      "required_docs": [
+        "6개월 이내 촬영 여권용 컬러사진 3매(3.5×4.5cm)",
+        "[c-license-01] 참조",
+        "면허증에 대한 대사관 확인서 또는 아포스티유 인증서",
+        "사진",
+        "신분증(외국인등록증 등)",
+        "여권 원본",
+        "외국면허증 원본",
+        "외국인등록증 원본",
+        "응시원서",
+        "출입국사실 증명서"
+      ],
+      "dept": "한국도로교통공단 운전면허시험장 (또는 경찰서 민원실)",
+      "phone": "☎ 1577-1120 (도로교통공단 고객지원센터)",
+      "legal_basis": []
+    },
+    "행정": {
+      "label": {
+        "ko": "행정·전입",
+        "en": "Administration"
+      },
+      "eligibility": {
+        "ko": "화성시로 전입한 거주자",
+        "en": "Residents who moved into Hwaseong"
+      },
+      "national_law": {
+        "ko": "주민등록법 / 출입국관리법(외국인 체류지 신고)",
+        "en": "Resident Registration Act"
+      },
+      "prerequisites": [],
+      "support_policies": [],
+      "faq_ids": [
+        "c-admin-01",
+        "c-admin-02"
+      ],
+      "required_docs": [
+        "상담 내용에 따라 외국인등록증 등",
+        "신분증(외국인은 외국인등록증/국내거소신고증)",
+        "전입신고서"
+      ],
+      "dept": "화성시 읍·면·동 행정복지센터 / 행정안전부",
+      "phone": "☎ 행정안전부 생활민원 1588-2188 / 화성시 콜센터 1688-0911",
+      "legal_basis": []
+    }
+  },
+  "relations": [
+    {
+      "from": "체류",
+      "type": "prerequisite_for",
+      "to": "건강보험",
+      "note": {
+        "ko": "외국인등록 후 6개월 이상 체류 시 건강보험 지역가입 의무",
+        "en": "Health insurance enrollment follows foreign registration & 6-month residence"
+      }
+    },
+    {
+      "from": "체류",
+      "type": "prerequisite_for",
+      "to": "운전면허",
+      "note": {
+        "ko": "운전면허 신청·발급에는 외국인등록(거소신고)이 필요",
+        "en": "A driver's license requires foreign registration first"
+      }
+    },
+    {
+      "from": "체류",
+      "type": "prerequisite_for",
+      "to": "보육교육",
+      "note": {
+        "ko": "어린이집 입소 신청 시 외국인등록·전입 정보가 활용됨",
+        "en": "Daycare application uses registration & move-in info"
+      }
+    }
+  ]
+}

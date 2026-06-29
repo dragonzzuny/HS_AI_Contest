@@ -12,3 +12,10 @@ node_modules/
 .omc/
 .vscode/
 .idea/
+
+# 동봉 바이너리(스크립트가 자동 다운로드 — 리포에는 미포함)
+bin/cloudflared.exe
+
+# 서버 로그
+data/server.log
+data/collect.log

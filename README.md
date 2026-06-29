@@ -16,16 +16,38 @@
 
 ## 주요 기능
 
-- **다국어 질의·응답**: 사용자 언어로 묻고 답변. 근거(출처)는 한국어 원문 유지.
+- **다국어 질의·응답**: 사용자 언어로 묻고 답변. 근거(출처)는 한국어 원문 유지. 6개 언어 교차언어 라우팅.
 - **인용기반 RAG**: 모든 답변에 근거 항목 ID를 인라인 표기 → 클릭하면 원문·출처·담당부서 표시.
-  근거에 없으면 단정하지 않고 담당기관 문의로 안내(환각·오답 방지).
+- **🛡️ 환각(헛소리) 방지 가드레일**: 근거 신뢰도 게이트 + 인용 무결성 검증 + 안전 거부.
+  근거가 없으면 **절대 지어내지 않고** 담당기관(콜센터)으로 안내. 평가 하네스로 정량 검증(아래).
+- **🧭 도메인 온톨로지**: 도메인↔필요서류↔담당부서↔**법적 근거(화성시 자치법규 실효조문)**↔자격↔선행절차↔지원정책을
+  연결한 지식그래프. 질문에 맞는 **실효 조문**(목적조항이 아닌 수수료·배출방법 등)과 "자격·절차 안내",
+  **받을 수 있는 지원정책**(간이대지급금·다누리콜센터·보육료 지원 등)을 자동 동반.
+  무결성 검증(`scripts/validate_ontology.py`)으로 헛링크·쓰레기 인용 0건 보장. 상세: [docs/ONTOLOGY_REVIEW.md](docs/ONTOLOGY_REVIEW.md).
+- **🧹 데이터 정화**: 법제처 수집 실패(오류) 청크 79건을 검색·인용에서 자동 제외(헛소리 원천 차단).
+- **📥 서류 다운로드**: 생성한 진정서·신고서를 `.txt` 파일로 다운로드(+복사).
 - **2계층 지식베이스**:
   - **L1** 외국인 고빈도 생활민원 FAQ 37건(체류·노무·건강보험·폐기물·보육·운전면허·행정·지원기관) — 사람 검증.
   - **L2** 화성시 자치법규(조례·규칙) 839건 → 11,268개 조문 청크(법제처 국가법령정보 Open API 전수 수집).
 - **처리 도우미(Action)**:
-  - 맞춤 **필요서류 체크리스트**
+  - 맞춤 **필요서류 체크리스트** · **자격·선행절차 안내**(온톨로지)
   - **신청서·진정서 초안 자동 작성**(임금체불 진정서, 대형폐기물 신고) — 빈칸 채우면 한국어 공식 서식 생성
   - 정부24·하이코리아·노동포털 등 정확한 **신청 딥링크**
+
+## 신뢰성 · 정량 검증 (제품화 게이트)
+
+`scripts/eval.py` — 6개 언어 × 8개 도메인 정상 질의 + 범위 밖(근거 없는) 질의 테스트셋으로 자동 측정:
+
+| 지표 | 결과 | 기준 |
+|---|---|---|
+| 라우팅 정확도(top-1) | **100%** | ≥90% |
+| 인용 무결성(유령 인용 0) | **100%** | 100% |
+| **환각 거부율**(범위 밖 질문 안전 거부) | **100%** | ≥90% |
+
+```bash
+python -m uvicorn backend.app:app --host 0.0.0.0 --port 5200   # 창1
+PYTHONUTF8=1 python scripts/eval.py                            # 창2 (게이트 미달 시 종료코드 1)
+```
 
 ## 아키텍처
 
@@ -36,8 +58,10 @@
        │  ① 질의 검색(하이브리드)  ② 근거 그라운딩 생성  ③ 처리보조(서류초안·딥링크)
        ▼
 [검색층] BGE-M3 임베딩 + Weaviate 하이브리드(키워드+벡터) + 리랭커
+[가드레일] 신뢰도 게이트 → 근거 없으면 안전 거부(환각 방지) + 인용 무결성 검증
+[온톨로지] 도메인↔서류↔부서↔법적근거(자치법규)↔자격↔선행절차 그래프로 답변 보강
 [생성층] 로컬 LLM(Ollama) — 다국어 그라운딩 답변
-[지식]   L1 FAQ(kb/*.md) + L2 자치법규(법제처 Open API)
+[지식]   L1 FAQ(kb/*.md) + L2 자치법규(법제처 Open API) + 온톨로지(kb/ontology.json)
 ```
 
 > LLM/벡터DB가 없어도 **MOCK 모드(키워드 검색 + 템플릿)**로 즉시 작동하며,
@@ -52,7 +76,25 @@ python -m uvicorn backend.app:app --host 0.0.0.0 --port 5200
 # 브라우저: http://localhost:5200
 ```
 
-자치법규(L2) 수집·실동작(Ollama/Weaviate) 전환 등 상세 절차는 **[RUN.md](RUN.md)** 참고.
+**외부 컴퓨터에서 접속**(심사위원 공유용) — 계정·도메인 없이 인터넷 공개 URL 발급:
+```bash
+./scripts/serve.ps1     # 창1: 서버(LAN 접속 IP 안내 + 방화벽 규칙)
+./scripts/tunnel.ps1    # 창2: https://....trycloudflare.com 공개 주소 발급
+```
+
+자치법규(L2) 수집·실동작(Ollama/Weaviate) 전환·외부 접속 등 상세 절차는 **[RUN.md](RUN.md)** 참고.
+
+## 화면
+
+실제 동작 캡처(6개 언어 · 데모 모드) — 전체 갤러리는 **[docs/SCREENSHOTS.md](docs/SCREENSHOTS.md)**.
+
+| 첫 화면(한국어) | 질의응답 + 근거 출처 |
+|---|---|
+| ![홈](docs/screenshots/01_home_ko.png) | ![질의응답](docs/screenshots/03_chat_ko.png) |
+
+| 다국어 전환(English) | 서류 초안 자동 생성 |
+|---|---|
+| ![영어](docs/screenshots/02_home_en.png) | ![서류초안](docs/screenshots/08_draft_result.png) |
 
 ## 기술 스택
 
@@ -66,12 +108,14 @@ python -m uvicorn backend.app:app --host 0.0.0.0 --port 5200
 ## 디렉터리 구조
 
 ```
-backend/      FastAPI 앱(검색·생성·처리보조·인용)
+backend/      FastAPI 앱(검색·생성·처리보조·인용·환각 가드레일·온톨로지 보강)
 web/          프론트(채팅·소스패널·다국어·처리 도우미)
-kb/           L1 FAQ(8개 도메인) + 스키마/DB설계/검증목록
-scripts/      build_kb / collect_ordinances / ingest_weaviate
-docker-compose.weaviate.yml
-RUN.md        실행·배포 가이드
+kb/           L1 FAQ(8개 도메인) + ontology.json(온톨로지 원본) + 스키마/검증목록
+scripts/      build_kb / build_ontology / collect_ordinances / ingest_weaviate
+              eval.py(평가 하네스) / screenshot.py / serve·tunnel·tunnel_named.ps1
+docs/         SCREENSHOTS.md(화면 갤러리) / DEPLOY.md(배포 가이드)
+render.yaml   Render 24시간 배포 Blueprint
+RUN.md        실행·외부접속·배포 가이드
 ```
 
 ## 데이터 출처
