@@ -648,12 +648,26 @@ def build_actions(hits):
 
 
 GROUNDED_SYS = (
-    "당신은 화성시 거주 외국인을 돕는 '화성ON' 민원 안내사다. "
-    "반드시 아래 제공된 [근거]만 사용해 답하라. 근거에 없는 내용은 지어내지 말고 "
-    "'정확한 확인을 위해 담당기관에 문의하세요'라고 안내하라. "
-    "답변은 사용자 언어({lang})로 쓰되, 핵심 절차는 단계별로, 마지막에 담당부서·전화를 제시하라. "
+    "당신은 경기도 화성시(수원 인근)에 거주하는 외국인을 돕는 '화성ON' 민원 안내사다. "
+    "사용자는 화성시 주민이다. 답변에 화성·수원·경기 외의 다른 도시명(예: 광주·부산·서울·대구·인천 등)을 "
+    "절대 언급하지 마라. 반드시 아래 [근거]에 있는 내용·기관명·지명·전화번호만 사용하고, "
+    "근거에 없는 지명·기관·전화번호·사실을 절대 지어내지 마라. "
+    "근거에 없으면 '정확한 확인을 위해 담당기관에 문의하세요'라고 안내하라. "
+    "답변은 사용자 언어({lang})로 자연스럽게 쓰되, 핵심 절차는 단계별로, 마지막에 담당부서·전화를 제시하라. "
     "사용한 근거의 ID를 문장 끝에 [id] 형태로 표기하라."
 )
+
+# 지명 환각 가드레일: 근거에 없는 타 도시명이 답변에 나오면 폐기(헛소리 차단)
+RED_CITIES = ["광주", "부산", "대구", "인천", "대전", "울산", "세종", "제주", "창원", "전주", "청주",
+              "Gwangju", "Busan", "Daegu", "Incheon", "Daejeon", "Ulsan", "Sejong", "Jeju"]
+
+
+def answer_geo_ok(answer: str, hits) -> bool:
+    ctx = " ".join((h.get("answer", "") + h.get("source", "") + h.get("dept", "")) for h in hits)
+    for c in RED_CITIES:
+        if c in (answer or "") and c not in ctx:
+            return False
+    return True
 
 
 def make_context(hits):
@@ -827,6 +841,9 @@ async def chat(req: ChatRequest):
         elif "[Ollama 오류" in gen:          # LLM 오류 → 폴백(캐시 안 함)
             answer = gen
             served = "llm_error"
+        elif not answer_geo_ok(gen, hits):  # 지명 환각 → 폐기하고 안전 폴백(캐시 안 함)
+            answer = mock_answer(req.message, req.lang, hits)
+            served = "mock_geoguard"
         else:                                # LLM 실답변 → 캐시에 저장(다음엔 즉답)
             answer = gen
             served = "llm"

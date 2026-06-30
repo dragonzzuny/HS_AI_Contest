@@ -62,12 +62,17 @@ def main():
             if not args.overwrite and app._cache_get(it["id"], lang):
                 print(f"  [{done}/{total}] skip {it['id']}/{lang} (이미 있음)")
                 continue
-            ans = asyncio.run(app.ollama_generate(query, lang, [hit]))
-            if ans and "[Ollama 오류" not in ans:
+            ans = None
+            for attempt in range(2):        # 지명 환각 시 1회 재생성
+                cand = asyncio.run(app.ollama_generate(query, lang, [hit]))
+                if cand and "[Ollama 오류" not in cand and app.answer_geo_ok(cand, [hit]):
+                    ans = cand
+                    break
+            if ans:
                 app._cache_put(it["id"], lang, ans)
-                print(f"  [{done}/{total}] ✓ {it['id']}/{lang} ({len(ans)}자)")
+                print(f"  [{done}/{total}] OK {it['id']}/{lang} ({len(ans)}자)")
             else:
-                print(f"  [{done}/{total}] ✗ {it['id']}/{lang} 생성 실패")
+                print(f"  [{done}/{total}] SKIP {it['id']}/{lang} (생성실패/지명환각)")
 
     n = sum(len(v) for v in app.ANSWER_CACHE.values())
     print(f"\n캐시 항목 {n}개 저장 → {app.CACHE_JSON}")
