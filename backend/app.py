@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 KB_JSON = ROOT / "kb" / "build" / "kb.json"
 ORD_JSON = ROOT / "kb" / "build" / "ordinances_chunks.json"
 ONTOLOGY_JSON = ROOT / "kb" / "build" / "ontology.json"
+CACHE_JSON = ROOT / "kb" / "build" / "answer_cache.json"
 WEB_DIR = ROOT / "web"
 
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "").strip()      # 비면 MOCK 생성
@@ -474,6 +475,47 @@ ONTOLOGY = {}
 if ONTOLOGY_JSON.exists():
     ONTOLOGY = json.loads(ONTOLOGY_JSON.read_text(encoding="utf-8"))
 
+# ── 답변 캐시: 자주 묻는 질문은 미리 만든 답을 즉시 제공(언어별) ──────
+# 키 = L1 근거 항목 ID(온톨로지 토픽). 흔한 질문은 캐시 즉답, 그 외는 LLM 실시간.
+# 미리 만들어 커밋하면 GPU 없는 배포에서도 6개 언어 즉시 응답.
+ANSWER_CACHE = {}
+_CACHE_MTIME = [0.0]
+
+
+def _reload_cache():
+    """캐시 파일이 바뀌면(프리필 등) 메모리에 다시 로드 — 재시작 불필요."""
+    try:
+        m = CACHE_JSON.stat().st_mtime
+    except OSError:
+        return
+    if m != _CACHE_MTIME[0]:
+        try:
+            data = json.loads(CACHE_JSON.read_text(encoding="utf-8"))
+            ANSWER_CACHE.clear()
+            ANSWER_CACHE.update(data)
+            _CACHE_MTIME[0] = m
+        except Exception:
+            pass
+
+
+_reload_cache()
+
+
+def _cache_get(item_id, lang):
+    _reload_cache()
+    return (ANSWER_CACHE.get(item_id) or {}).get(lang)
+
+
+def _cache_put(item_id, lang, answer):
+    _reload_cache()                          # 다른 프로세스가 채운 것 먼저 반영(덮어쓰기 방지)
+    ANSWER_CACHE.setdefault(item_id, {})[lang] = answer
+    try:
+        CACHE_JSON.write_text(json.dumps(ANSWER_CACHE, ensure_ascii=False, indent=1), encoding="utf-8")
+        _CACHE_MTIME[0] = CACHE_JSON.stat().st_mtime
+    except Exception:
+        pass
+
+
 # ── 공식 서식 카탈로그(고빈도·안정 공문서 수집) ────────────────────
 CATALOG = {}
 _cat = FORMS_DIR / "catalog.json"
@@ -772,9 +814,23 @@ async def chat(req: ChatRequest):
             "mode": "ollama" if OLLAMA_HOST else "mock",
         })
 
-    answer = await ollama_generate(req.message, req.lang, hits)
+    # 하이브리드: ① 캐시(미리 만든 답) 즉답 → ② LLM 실시간(성공 시 캐시 저장) → ③ MOCK 폴백
+    top_l1 = next((h for h in hits if h["layer"] == "L1"), hits[0])
+    cache_key = top_l1["id"]
+    served = "cache"
+    answer = _cache_get(cache_key, req.lang)
     if answer is None:
-        answer = mock_answer(req.message, req.lang, hits)
+        gen = await ollama_generate(req.message, req.lang, hits)
+        if gen is None:                     # OLLAMA 미연결 → MOCK(한국어 즉답)
+            answer = mock_answer(req.message, req.lang, hits)
+            served = "mock"
+        elif "[Ollama 오류" in gen:          # LLM 오류 → 폴백(캐시 안 함)
+            answer = gen
+            served = "llm_error"
+        else:                                # LLM 실답변 → 캐시에 저장(다음엔 즉답)
+            answer = gen
+            served = "llm"
+            _cache_put(cache_key, req.lang, gen)
     answer = validate_citations(answer, hits)   # 유령 인용 제거
 
     citations = [{
@@ -796,6 +852,7 @@ async def chat(req: ChatRequest):
         "citations": citations,
         "actions": actions[:9],
         "grounded": True, "refused": False,
+        "served": served,
         "mode": "ollama" if OLLAMA_HOST else "mock",
     })
 
