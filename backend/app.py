@@ -833,6 +833,8 @@ async def chat(req: ChatRequest):
     cache_key = top_l1["id"]
     served = "cache"
     answer = _cache_get(cache_key, req.lang)
+    if answer is not None and not answer_geo_ok(answer, hits):
+        answer = None                        # 오염된 캐시는 서빙하지 않고 재생성(읽기 가드레일)
     if answer is None:
         gen = await ollama_generate(req.message, req.lang, hits)
         if gen is None:                     # OLLAMA 미연결 → MOCK(한국어 즉답)
