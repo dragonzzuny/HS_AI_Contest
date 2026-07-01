@@ -174,7 +174,8 @@ function renderHero(){
     c.className = "topic";
     c.innerHTML = `<span class="ic">${tp.ic}</span>
       <span class="tl">${pick(tp.t)}</span>`;
-    c.onclick = () => { $("input").value = pick(tp.q); send(); };
+    // 주제 카드는 입력창에 채우기만(자동 전송하지 않음) — 사용자가 확인 후 전송
+    c.onclick = () => { const i=$("input"); i.value = pick(tp.q); i.focus(); };
     grid.appendChild(c);
   });
 }

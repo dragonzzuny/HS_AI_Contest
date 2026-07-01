@@ -296,6 +296,9 @@ def _tokens(s: str):
     # CJK(한자)는 단어경계가 없으므로 문자 bigram으로 보강
     cjk = re.findall(r"[一-鿿]", s)
     words += [cjk[i] + cjk[i + 1] for i in range(len(cjk) - 1)]
+    # 한글은 형태소 변형(가입해요/가입해야/가입)으로 단어매칭이 빗나가므로 음절 bigram 보강
+    hg = re.findall(r"[가-힣]", s)
+    words += [hg[i] + hg[i + 1] for i in range(len(hg) - 1)]
     return words
 
 
@@ -377,6 +380,18 @@ class Corpus:
                     "_blob": f"{c.get('law_name','')} {c.get('content','')}",
                 })
 
+        # L1 토큰 문서빈도(df) → IDF 가중용. 흔한 단어일수록 변별력 낮음.
+        self._l1_n = sum(1 for it in self.items if it["layer"] == "L1") or 1
+        self._df = {}
+        for it in self.items:
+            if it["layer"] == "L1":
+                for t in set(_tokens(it["_blob"])):
+                    self._df[t] = self._df.get(t, 0) + 1
+
+    def _idf(self, tok):
+        import math
+        return math.log(1.0 + self._l1_n / (self._df.get(tok, 0) + 0.5))
+
     def search(self, query: str, k: int = 4):
         ql = (query or "").lower()
         q = set(_tokens(query))
@@ -391,16 +406,31 @@ class Corpus:
             blob = set(_tokens(it["_blob"]))
             overlap = len(q & blob)
             if it["layer"] == "L1":
-                score = overlap * 1.5
+                # IDF 가중 겹침: 흔한 단어(어린이집·건강보험)는 낮게, 드문 의도어(가입·지원금·납부)는 높게
+                score = sum(self._idf(t) for t in (q & blob)) * 1.5
+                # 제목의 의도어 일치는 추가 가점(IDF 가중)
+                score += sum(self._idf(t) for t in (q & set(_tokens(it["title"])))) * 1.5
+                qmatch = False
                 for qx in it.get("questions", []):
-                    if q & set(_tokens(qx)):
-                        score += 3
-                if it["domain"] in boosted:
-                    score += 10          # 교차언어: 같은 도메인 L1 강하게 부스팅
+                    ov = q & set(_tokens(qx))
+                    if ov:
+                        idfsum = sum(self._idf(t) for t in ov)
+                        score += min(idfsum, 6)
+                        # 상투어(알려줘·어떻게 등 낮은 IDF)만 겹치면 매칭 불인정 — 내용어 필요
+                        if idfsum >= 3.0:
+                            qmatch = True
+                bo = it["domain"] in boosted
+                if bo:
+                    score += 500         # 트리거 매칭 도메인은 IDF 점수에 밀리지 않게 확실히 상위로
+                # 근거 신뢰 신호: 도메인 트리거 매칭만 인정(상투어 질문매칭으로는 근거 불인정).
+                # qmatch는 랭킹 점수에만 반영해 같은 도메인 내 소분류 구분에 사용.
+                it["_strong"] = bool(bo)
+                _ = qmatch
             else:  # L2 자치법규
                 score = overlap * (0.8 if law_intent else 0.25)
                 if it["domain"] in boosted:
                     score += 1
+                it["_strong"] = False
             if score > 0:
                 it["_score"] = round(score, 2)
                 scored.append((score, it))
@@ -457,7 +487,8 @@ def is_grounded(query: str, hits) -> bool:
     if not hits:
         return False
     l1 = [h for h in hits if h["layer"] == "L1"]
-    if l1 and l1[0].get("_score", 0) >= GATE_L1:
+    # 스케일 무관 신호: 도메인 트리거 매칭 또는 질문 매칭(_strong)이 있어야 근거로 인정.
+    if l1 and l1[0].get("_strong"):
         return True
     if _law_intent(query) and hits[0]["layer"] == "L2" and hits[0].get("_score", 0) >= GATE_L2:
         return True
