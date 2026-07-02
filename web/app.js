@@ -216,8 +216,8 @@ function renderSidePanel(citations, actions){
   const c=$("citations"); c.className=""; c.innerHTML="";
   if(!citations.length){ c.className="empty-box"; c.textContent="관련 근거를 찾지 못했습니다."; }
   citations.forEach(ci=>{
-    const d=document.createElement("div"); d.className="cit-card"+(ci.kind==="법적근거"?" legal":""); d.dataset.id=ci.id;
-    const layerLabel = ci.kind==="법적근거" ? "⚖️ 법적 근거" : (ci.layer==="L1"?"민원 FAQ":"자치법규");
+    const d=document.createElement("div"); d.className="cit-card"+(ci.kind==="법적근거"?" legal":ci.kind==="웹"?" web":""); d.dataset.id=ci.id;
+    const layerLabel = ci.kind==="웹" ? "🌐 인터넷(공식)" : ci.kind==="법적근거" ? "⚖️ 법적 근거" : (ci.layer==="L1"?"민원 FAQ":"자치법규");
     d.innerHTML=`<div class="cit-top"><span class="cit-id">[${ci.id}]</span>
       <span class="cit-layer ${ci.layer.toLowerCase()}">${layerLabel}</span>
       ${ci.confidence?`<span class="conf ${ci.confidence}">${ci.confidence}</span>`:""}</div>

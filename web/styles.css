@@ -186,6 +186,8 @@ body{
 .cit-card.flash{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 0 0 3px rgba(29,78,216,.16)}
 .cit-card.legal{border-left:3px solid #8b5cf6}
 .cit-card.legal .cit-layer{background:#efe9ff;color:#6d28d9}
+.cit-card.web{border-left:3px solid #14b8a6}
+.cit-card.web .cit-layer{background:#d5f5f0;color:#0f766e}
 .cit-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .cit-id{font-size:11px;color:var(--brand);font-weight:800;font-variant-numeric:tabular-nums}
 .cit-layer{font-size:10px;font-weight:700;padding:2px 7px;border-radius:7px}

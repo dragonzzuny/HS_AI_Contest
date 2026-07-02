@@ -96,6 +96,14 @@ python scripts/ingest_weaviate.py                          # L1+L2 임베딩 적
 ```
 ※ 현재 `backend/app.py`는 KB 키워드 검색을 사용. Weaviate 하이브리드 검색으로 교체하는 retrieval 모듈은 다음 작업 항목(아래 TODO).
 
+## 웹 폴백(선택) — KB에 없는 질문을 '공식 홈페이지'만 검색해 안내
+환경변수 `WEB_FALLBACK=1` 이면, KB(온톨로지)에 근거가 없을 때 **공식 도메인(.go.kr/.or.kr/gov.kr)만**
+인터넷 검색·요약해 안내합니다(블로그·상업사이트 배제). 답변에 "🌐 인터넷(공식)" 출처 + "확인 필요" 면책을 붙이며,
+공식 출처가 없으면(예: 비트코인·맛집) 그대로 안전 거부합니다. 인터넷 연결 필요, LLM 없으면 공식 링크만 안내.
+```
+WEB_FALLBACK=1 OLLAMA_HOST=http://localhost:11434 GEN_MODEL=gemma3:4b python -m uvicorn backend.app:app --host 0.0.0.0 --port 5200
+```
+
 ## 완료
 - [x] 프론트 전면 리디자인(밝은 공공서비스 톤·반응형·접근성·6개 언어 UI 완전 현지화)
 - [x] **환각 방지 가드레일**: 신뢰도 게이트 + 안전 거부 + 인용 무결성 검증 (`backend/app.py`)
